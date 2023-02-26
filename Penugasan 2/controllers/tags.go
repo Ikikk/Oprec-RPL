@@ -11,16 +11,7 @@ type TagControllers struct {
 	tag *models.Tags
 }
 
-func ConnectTags() (*sql.DB, error) {
-	db, err := sql.Open("toDo", "postgres://postgres:5555@localhost:5432/toDo")
-	if err != nil {
-		return nil, err
-	}
-
-	return db, nil
-}
-
-func InsertTagsToDB(db *sql.DB, tag *models.Tags) (*TagControllers, error) {
+func InsertTagsToDB(db *sql.DB, tag models.Tags) (*TagControllers, error) {
 	rows, err := db.Query("INSERT INTO tags (label) VALUES ($1) RETURNING label", tag.Label)
 	if err != nil {
 		return nil, err

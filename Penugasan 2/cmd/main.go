@@ -2,6 +2,8 @@ package cmd
 
 import (
 	"Penugasan-2/config"
+	"Penugasan-2/controllers"
+	"Penugasan-2/models"
 	"fmt"
 )
 
@@ -16,20 +18,25 @@ func main() {
 		fmt.Println(err)
 	}
 
-	// alex := User{
-	// 	Title: "alex",
-	// }
+	toDoList := models.Lists{}
+	toDoTag := models.Tags{}
 
-	// val, err := config.InsertToDB(db, alex)
-	// if err != nil {
-	// 	fmt.Println(err)
-	// }
+	list, err := controllers.InsertListsToDB(db, toDoList)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	tag, err := controllers.InsertTagsToDB(db, toDoTag)
+	if err != nil {
+		fmt.Println(err)
+	}
 
 	res, err := config.GetAll(db)
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	// fmt.Println((val))
+	fmt.Println(list)
+	fmt.Println(tag)
 	fmt.Println(res)
 }
